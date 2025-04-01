@@ -1,60 +1,118 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
-/* index.css (or your main CSS file) */
+/* index.css */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Lato:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Add these custom classes */
-.section2-fixed {
-  @apply fixed inset-0 w-full h-screen opacity-0 z-10 pointer-events-none; /* Start hidden and non-interactive */
-  /* Keep the mask properties here or directly in the style attribute */
-   mask-image: radial-gradient(circle at 50% 50%, black calc(var(--mask-reveal-percent) - 15%), transparent var(--mask-reveal-percent));
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, black calc(var(--mask-reveal-percent) - 15%), transparent var(--mask-reveal-percent));
-  mask-size: cover;
+/* Define the new color palette and fonts */
+:root {
+  /* Core Palette */
+  --color-cream: #FDFBF5;            /* Soft, warm off-white base */
+  --color-charcoal: #36454F;         /* Dark grey/blue for body text */
+  --color-white: #FFFFFF;            /* Pure white for high contrast */
+
+  /* Shire Greens */
+  --color-shire-green: #4A6D4D;      /* Main natural green */
+  --color-shire-green-dark: #2E4731; /* Darker green for headings/emphasis */
+
+  /* Water Blues (Steel Blue Theme) */
+  --color-water-blue-light: #A7C4CF; /* Lighter steel blue */
+  --color-water-blue: #70A0AF;      /* Main steel blue */
+  --color-water-blue-dark: #466A7F; /* Darker steel blue */
+
+  /* Accent Gold */
+  --color-shire-gold-light: #EAE0C8; /* Pale, elegant gold/beige accent */
+
+  /* Fonts */
+  --font-sans: 'Lato', sans-serif;
+  --font-serif: 'Cormorant Garamond', serif;
+
+  /* Mask Gradients (Unchanged) */
+  --mask-image-radial: radial-gradient(circle at 50% 50%, black calc(var(--mask-reveal-percent) - 15%), transparent var(--mask-reveal-percent));
+  --mask-image-linear-vertical: linear-gradient(to bottom, transparent 0%, black var(--fade-height, 150px), black calc(100% - var(--fade-height, 150px)), transparent 100%);
+  --mask-image-linear-top: linear-gradient(to bottom, transparent 0%, black var(--fade-height, 150px));
+}
+
+
+@layer base {
+  body {
+    /* Apply base background, text color, and sans-serif font */
+    @apply bg-[var(--color-cream)] text-[var(--color-charcoal)] antialiased;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+     /* Apply serif font and dark green color to all headings */
+    @apply text-[var(--color-shire-green-dark)];
+    font-family: var(--font-serif);
+  }
+
+   /* Improved scrollbar with new theme colors */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #edeae3; /* Slightly darker cream */
+  }
+  ::-webkit-scrollbar-thumb {
+     /* Using a muted blue/grey from the palette */
+    background: var(--color-water-blue);
+    border-radius: 4px;
+    opacity: 0.7;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+     background: var(--color-water-blue-dark); /* Darker blue on hover */
+     opacity: 0.9;
+  }
+
+   /* Custom mask property for Firefox if needed */
+   .masked-element {
+     -webkit-mask-image: var(--mask-image-gradient); /* Use appropriate mask var */
+     mask-image: var(--mask-image-gradient);
+     -webkit-mask-size: cover;
+     mask-size: cover;
+     -webkit-mask-repeat: no-repeat;
+     mask-repeat: no-repeat;
+     -webkit-mask-position: center center;
+     mask-position: center center;
+   }
+}
+
+/* Mask Utilities (Unchanged Logic, ensure variables are defined) */
+.radial-mask {
+  --mask-reveal-percent: 5%; /* Default start value */
+  -webkit-mask-image: var(--mask-image-radial);
+  mask-image: var(--mask-image-radial);
   -webkit-mask-size: cover;
-  mask-repeat: no-repeat;
+  mask-size: cover;
   -webkit-mask-repeat: no-repeat;
-  mask-position: center center;
+  mask-repeat: no-repeat;
   -webkit-mask-position: center center;
+  mask-position: center center;
 }
 
-.section2-scrollable {
-  @apply relative w-full h-screen overflow-y-auto z-40 pointer-events-auto opacity-100; /* Becomes relative, scrollable, visible, interactive, positioned below subsequent sections initially */
-  /* Mask should be fully revealed by GSAP animation, so we don't need it here,
-     but ensure the custom property is set to its end value if needed */
-   --mask-reveal-percent: 110%; /* Or whatever your final value is */
-   /* Optional: Add a background if it wasn't part of the fixed state */
-   @apply bg-emerald-50/80;
+.vertical-linear-mask {
+   --fade-height: 200px; /* Default fade height */
+  -webkit-mask-image: var(--mask-image-linear-vertical);
+  mask-image: var(--mask-image-linear-vertical);
 }
 
-/* Ensure content inside section 2 doesn't overflow horizontally */
-.section2-scrollable > div {
-   @apply max-w-full overflow-x-hidden;
+.top-linear-mask {
+   --fade-height: 200px; /* Default fade height */
+  -webkit-mask-image: var(--mask-image-linear-top);
+  mask-image: var(--mask-image-linear-top);
 }
 
-
-/* Keep other styles */
-/* ... */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-body {
-  /* Set the default body font */
-  font-family: 'Lato', sans-serif;
-  @apply font-light; /* Example base weight */
-  /* Helps prevent jerky scroll on some browsers */
-  overscroll-behavior: none;
-  /* Smoother font rendering */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-h1, h2, h3, h4, h5, h6 {
-   /* Set the default heading font */
-   font-family: 'Playfair Display', serif;
-   @apply font-medium; /* Example base weight */
-}
-
-/* Style for scrollbar (optional, but adds polish) */
-/* ... (scrollbar styles remain the same) ... */
+/* Ensure Tailwind applies the fonts correctly */
+/* Add this to your tailwind.config.js extend theme section:
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Lato', 'sans-serif'],
+        serif: ['Cormorant Garamond', 'serif'],
+      },
+      // ... other extensions
+    },
+  },
+*/
