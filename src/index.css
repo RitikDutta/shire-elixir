@@ -1,5 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+/* index.css (or your main CSS file) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* Add these custom classes */
+.section2-fixed {
+  @apply fixed inset-0 w-full h-screen opacity-0 z-10 pointer-events-none; /* Start hidden and non-interactive */
+  /* Keep the mask properties here or directly in the style attribute */
+   mask-image: radial-gradient(circle at 50% 50%, black calc(var(--mask-reveal-percent) - 15%), transparent var(--mask-reveal-percent));
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black calc(var(--mask-reveal-percent) - 15%), transparent var(--mask-reveal-percent));
+  mask-size: cover;
+  -webkit-mask-size: cover;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center center;
+  -webkit-mask-position: center center;
+}
+
+.section2-scrollable {
+  @apply relative w-full h-screen overflow-y-auto z-40 pointer-events-auto opacity-100; /* Becomes relative, scrollable, visible, interactive, positioned below subsequent sections initially */
+  /* Mask should be fully revealed by GSAP animation, so we don't need it here,
+     but ensure the custom property is set to its end value if needed */
+   --mask-reveal-percent: 110%; /* Or whatever your final value is */
+   /* Optional: Add a background if it wasn't part of the fixed state */
+   @apply bg-emerald-50/80;
+}
+
+/* Ensure content inside section 2 doesn't overflow horizontally */
+.section2-scrollable > div {
+   @apply max-w-full overflow-x-hidden;
+}
+
+
+/* Keep other styles */
+/* ... */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
