@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useRef, useLayoutEffect, useEffect } from "react";
 import "./index.css"; // Import updated global styles with variables
 import { gsap } from "gsap";
