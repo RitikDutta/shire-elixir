@@ -4,6 +4,8 @@ import React, { useRef, useLayoutEffect, useEffect } from "react";
 import "./index.css"; // Assuming this contains the necessary CSS variables and base styles
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ShopPage from "./ShopPage";
 
 // --- Icons (Using existing and Molecule Icon) ---
 const LeafIcon = ({
@@ -333,352 +335,369 @@ function App() {
 
   // --- JSX Structure ---
   return (
-    <div ref={appRef} className="relative w-full">
-      {/* Section 1: Hero (Updated Content) */}
-      <section
-        ref={heroRef}
-        className={`h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-gradient-to-b from-[var(--color-cream)] via-[var(--color-water-blue-light)] to-[var(--color-water-blue)]`}
-      >
-        <div
-          ref={heroContentWrapperRef}
-          className="w-full flex flex-col items-center justify-center absolute top-0 left-0 h-full"
-        >
-          <div className="z-30 text-center relative mb-[-10vh] px-4 will-change-transform">
-            <h1
-              ref={heroTitleRef}
-              className="text-5xl md:text-7xl lg:text-8xl font-bold text-[var(--color-shire-green-dark)] mb-4 tracking-tight font-serif"
-            >
-              Shire Elixir
-            </h1>
-            <p
-              ref={heroSubtitleRef}
-              className="text-lg md:text-xl text-[var(--color-shire-green)] max-w-lg mx-auto leading-relaxed font-sans" // Slightly wider max-w
-            >
-              {/* UPDATED Subtitle */}
-              Radically transparent, science-backed hair wellness. Formulated for all, open to all.
-            </p>
-          </div>
-          {/* Bottle images remain the same */}
-          <div
-            ref={bottleContainerRef}
-            className="relative z-10 mt-8 grid place-items-center w-[80vw] sm:w-[60vw] md:w-[40vw] md:max-w-[350px]"
-            style={{ height: "60vh" }}
-          >
-            <img ref={nozzleRef} src={nozzleImageUrl} alt="" className="col-start-1 row-start-1 w-full h-full object-contain z-0 will-change-transform" aria-hidden="true"/>
-            <img ref={bottleRef} src={bottleImageUrl} alt="Shire Elixir hair serum bottle" className="col-start-1 row-start-1 w-full h-full object-contain z-10 will-change-transform drop-shadow-lg"/>
-            <img ref={dropRef} src={dropImageUrl} alt="Shire Elixir serum drop" className="col-start-1 row-start-1 w-full h-full object-contain opacity-0 will-change-transform z-20 pointer-events-none"/>
-          </div>
-        </div>
-      </section>
+    <Router>
+      <div ref={appRef} className="relative w-full">
+        <Routes>
+          <Route path="/" element={
+            <>
+              {/* Section 1: Hero */}
+              <section
+                ref={heroRef}
+                className={`h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-gradient-to-b from-[var(--color-cream)] via-[var(--color-water-blue-light)] to-[var(--color-water-blue)]`}
+              >
+                {/* Add floating particles to the hero section */}
+                <div className="absolute inset-0 overflow-hidden">
+                  <div className="hero-particle"></div>
+                  <div className="hero-particle"></div>
+                  <div className="hero-particle"></div>
+                  <div className="hero-particle"></div>
+                  <div className="hero-particle"></div>
+                </div>
+                <div
+                  ref={heroContentWrapperRef}
+                  className="w-full flex flex-col items-center justify-center absolute top-0 left-0 h-full"
+                >
+                  <div className="z-30 text-center relative mb-[-10vh] px-4 will-change-transform">
+                    <h1
+                      ref={heroTitleRef}
+                      className="text-5xl md:text-7xl lg:text-8xl font-bold text-[var(--color-shire-green-dark)] mb-4 tracking-tight font-serif"
+                    >
+                      Shire Elixir
+                    </h1>
+                    <p
+                      ref={heroSubtitleRef}
+                      className="text-lg md:text-xl text-[var(--color-shire-green)] max-w-lg mx-auto leading-relaxed font-sans" // Slightly wider max-w
+                    >
+                      {/* UPDATED Subtitle */}
+                      Radically transparent, science-backed hair wellness. Formulated for all, open to all.
+                    </p>
+                  </div>
+                  {/* Bottle images remain the same */}
+                  <div
+                    ref={bottleContainerRef}
+                    className="relative z-10 mt-8 grid place-items-center w-[80vw] sm:w-[60vw] md:w-[40vw] md:max-w-[350px]"
+                    style={{ height: "60vh" }}
+                  >
+                    <img ref={nozzleRef} src={nozzleImageUrl} alt="" className="col-start-1 row-start-1 w-full h-full object-contain z-0 will-change-transform" aria-hidden="true"/>
+                    <img ref={bottleRef} src={bottleImageUrl} alt="Shire Elixir hair serum bottle" className="col-start-1 row-start-1 w-full h-full object-contain z-10 will-change-transform drop-shadow-lg"/>
+                    <img ref={dropRef} src={dropImageUrl} alt="Shire Elixir serum drop" className="col-start-1 row-start-1 w-full h-full object-contain opacity-0 will-change-transform z-20 pointer-events-none"/>
+                  </div>
+                </div>
+              </section>
 
-      {/* Section 2: Inside Drop Content (Updated Content) */}
-      <section
-        ref={insideDropRef}
-        className={`fixed inset-0 w-full h-screen opacity-0 z-10 bg-[var(--color-water-blue)] pointer-events-auto flex flex-col items-center justify-center radial-mask will-change-opacity`}
-      >
-        <div
-          ref={insideDropContentRef}
-          className="relative z-0 text-[var(--color-charcoal)] px-4 md:px-8 max-w-4xl w-full will-change-opacity flex flex-col items-center"
-        >
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 md:mb-10 text-center text-[var(--color-shire-green-dark)] font-serif">
-            The Science of Shire
-          </h2>
+              {/* Section 2: Inside Drop Content */}
+              <section
+                ref={insideDropRef}
+                className={`fixed inset-0 w-full h-screen opacity-0 z-10 bg-[var(--color-water-blue)] pointer-events-auto flex flex-col items-center justify-center radial-mask will-change-opacity`}
+              >
+                <div
+                  ref={insideDropContentRef}
+                  className="relative z-0 text-[var(--color-charcoal)] px-4 md:px-8 max-w-4xl w-full will-change-opacity flex flex-col items-center"
+                >
+                  <h2 className="text-4xl md:text-6xl font-bold mb-6 md:mb-10 text-center text-[var(--color-shire-green-dark)] font-serif">
+                    The Science of Shire
+                  </h2>
 
-          <div className="w-full bg-[var(--color-cream)]/80 backdrop-blur-lg p-6 md:p-10 rounded-xl shadow-2xl text-center max-w-3xl">
-             {/* UPDATED Paragraph */}
-            <p className="text-lg md:text-xl leading-relaxed mb-8 text-[var(--color-charcoal)] font-sans">
-              Shire Elixir is born from a commitment to open research and scientific precision. We believe in effective, honest hair care, transparently developed for universal benefit.
-            </p>
+                  <div className="w-full bg-[var(--color-cream)]/80 backdrop-blur-lg p-6 md:p-10 rounded-xl shadow-2xl text-center max-w-3xl">
+                     {/* UPDATED Paragraph */}
+                    <p className="text-lg md:text-xl leading-relaxed mb-8 text-[var(--color-charcoal)] font-sans">
+                      Shire Elixir is born from a commitment to open research and scientific precision. We believe in effective, honest hair care, transparently developed for universal benefit.
+                    </p>
 
-            {/* UPDATED Feature Grid - reflecting USP */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8">
-              {/* Feature 1: Open Research */}
-              <div className="flex flex-col items-center">
-                 <GithubIcon className="w-10 h-10 mb-3" colorVar="--color-shire-green-dark" />
-                <h3 className="text-lg font-semibold mb-2 text-[var(--color-shire-green-dark)] font-sans">
-                  Open Research
-                </h3>
-                <p className="text-sm text-[var(--color-charcoal)]/90 font-sans leading-relaxed">
-                  Our formulas, ingredient sourcing, and test results are fully documented and publicly available.
-                </p>
-              </div>
-              {/* Feature 2: Science-Backed */}
-              <div className="flex flex-col items-center">
-                <ScienceIcon className="w-10 h-10 mb-3" colorVar="--color-shire-green-dark" />
-                <h3 className="text-lg font-semibold mb-2 text-[var(--color-shire-green-dark)] font-sans">
-                  Precision Formulated
-                </h3>
-                <p className="text-sm text-[var(--color-charcoal)]/90 font-sans leading-relaxed">
-                   Leveraging scientific data for optimal ingredient synergy, concentration, and hair health.
-                </p>
-              </div>
-              {/* Feature 3: Unisex Design */}
-              <div className="flex flex-col items-center">
-                 <LeafIcon className="w-10 h-10 mb-3" colorVar="--color-shire-green-dark" /> {/* Kept Leaf for 'Natural' aspect of Universal */}
-                <h3 className="text-lg font-semibold mb-2 text-[var(--color-shire-green-dark)] font-sans">
-                  Universally Effective
-                </h3>
-                <p className="text-sm text-[var(--color-charcoal)]/90 font-sans leading-relaxed">
-                   Designed for all hair types and textures, promoting fundamental hair health for everyone.
-                </p>
-              </div>
-            </div>
+                    {/* UPDATED Feature Grid - reflecting USP */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8">
+                      {/* Feature 1: Open Research */}
+                      <div className="flex flex-col items-center">
+                         <GithubIcon className="w-10 h-10 mb-3" colorVar="--color-shire-green-dark" />
+                        <h3 className="text-lg font-semibold mb-2 text-[var(--color-shire-green-dark)] font-sans">
+                          Open Research
+                        </h3>
+                        <p className="text-sm text-[var(--color-charcoal)]/90 font-sans leading-relaxed">
+                          Our formulas, ingredient sourcing, and test results are fully documented and publicly available.
+                        </p>
+                      </div>
+                      {/* Feature 2: Science-Backed */}
+                      <div className="flex flex-col items-center">
+                        <ScienceIcon className="w-10 h-10 mb-3" colorVar="--color-shire-green-dark" />
+                        <h3 className="text-lg font-semibold mb-2 text-[var(--color-shire-green-dark)] font-sans">
+                          Precision Formulated
+                        </h3>
+                        <p className="text-sm text-[var(--color-charcoal)]/90 font-sans leading-relaxed">
+                           Leveraging scientific data for optimal ingredient synergy, concentration, and hair health.
+                        </p>
+                      </div>
+                      {/* Feature 3: Unisex Design */}
+                      <div className="flex flex-col items-center">
+                         <LeafIcon className="w-10 h-10 mb-3" colorVar="--color-shire-green-dark" /> {/* Kept Leaf for 'Natural' aspect of Universal */}
+                        <h3 className="text-lg font-semibold mb-2 text-[var(--color-shire-green-dark)] font-sans">
+                          Universally Effective
+                        </h3>
+                        <p className="text-sm text-[var(--color-charcoal)]/90 font-sans leading-relaxed">
+                           Designed for all hair types and textures, promoting fundamental hair health for everyone.
+                        </p>
+                      </div>
+                    </div>
 
-            <p className="text-base italic text-[var(--color-charcoal)]/70 mb-8 font-sans">
-              Explore the meticulously chosen ingredients that power Shire Elixir.
-            </p>
+                    <p className="text-base italic text-[var(--color-charcoal)]/70 mb-8 font-sans">
+                      Explore the meticulously chosen ingredients that power Shire Elixir.
+                    </p>
 
-            {/* Button can remain, or link to ingredients section/GitHub */}
-            {/* Example: Link to Ingredients Section (requires setting up scroll-to functionality) */}
-            <button
-              onClick={() => ingredientsSectionRef.current?.scrollIntoView({ behavior: 'smooth' })}
-              className="mt-2 px-8 py-3 bg-[var(--color-shire-green)] text-[var(--color-white)] rounded-full font-semibold font-sans hover:bg-[var(--color-shire-green-dark)] transition duration-300 ease-in-out shadow-md transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-shire-green)]">
-              See The Ingredients
-            </button>
-             {/* Or a link to GitHub */}
-             {/* <a href="YOUR_GITHUB_LINK_HERE" target="_blank" rel="noopener noreferrer" className="...">Explore Research</a> */}
-          </div>
-        </div>
-      </section>
+                    {/* Button can remain, or link to ingredients section/GitHub */}
+                    {/* Example: Link to Ingredients Section (requires setting up scroll-to functionality) */}
+                    <button
+                      onClick={() => ingredientsSectionRef.current?.scrollIntoView({ behavior: 'smooth' })}
+                      className="mt-2 px-8 py-3 bg-[var(--color-shire-green)] text-[var(--color-white)] rounded-full font-semibold font-sans hover:bg-[var(--color-shire-green-dark)] transition duration-300 ease-in-out shadow-md transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-shire-green)]">
+                      See The Ingredients
+                    </button>
+                     {/* Or a link to GitHub */}
+                     {/* <a href="YOUR_GITHUB_LINK_HERE" target="_blank" rel="noopener noreferrer" className="...">Explore Research</a> */}
+                  </div>
+                </div>
+              </section>
 
-      {/* Section 3: Ingredients (Updated Content to emphasize USP) */}
-      <section
-        ref={ingredientsSectionRef}
-        className={`relative w-full py-24 md:py-36 z-20 overflow-hidden`}
-      >
-        {/* Canvas Background (Unchanged) */}
-        <canvas ref={bubblesCanvasRef} id="bubbles" className="absolute inset-0 w-full h-full -z-10 bg-[var(--color-water-blue)] vertical-linear-mask" width="1000" height="800" style={{ "--fade-height": "200px" }}></canvas>
-        {/* Ingredients Content (UPDATED) */}
-        <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 md:gap-16 items-center relative z-0">
-          <div
-            ref={ingredientsContentRef}
-            className={`max-w-none will-change-transform will-change-opacity text-[var(--color-charcoal)] font-sans`}
-          >
-             {/* UPDATED Title */}
-            <h2
-              className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-[var(--color-shire-green-dark)] font-serif`}
-            >
-              Transparently Sourced, Scientifically Chosen
-            </h2>
-             {/* UPDATED Paragraph - Emphasizing USP */}
-            <p className="mb-6 text-lg leading-relaxed">
-              We believe in full transparency. Every ingredient in Shire Elixir is selected based on rigorous scientific research for its efficacy and safety. Our formulation process, ingredient rationale, dilution accuracy, and testing data are meticulously logged and openly shared.
-            </p>
-             {/* UPDATED GitHub Link/Mention */}
-             <div className="mb-6 p-4 bg-[var(--color-cream)] rounded-lg border border-[var(--color-shire-green)]/30 inline-block">
-                <p className="text-base flex items-center">
-                    <GithubIcon className="w-5 h-5 mr-2 flex-shrink-0" colorVar="--color-shire-green-dark" />
-                    <span>
-                        Explore our complete research, formulation logs, and testing data on our public{' '}
-                        <a
-                          href="YOUR_GITHUB_REPOSITORY_LINK_HERE" // <-- **** REPLACE WITH YOUR ACTUAL GITHUB LINK ****
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-semibold text-[var(--color-shire-green-dark)] underline hover:text-[var(--color-shire-green)] transition-colors duration-200"
-                        >
-                          GitHub repository
-                        </a>.
-                    </span>
-                </p>
-             </div>
+              {/* Section 3: Ingredients */}
+              <section
+                ref={ingredientsSectionRef}
+                className={`relative w-full py-24 md:py-36 z-20 overflow-hidden`}
+              >
+                {/* Canvas Background (Unchanged) */}
+                <canvas ref={bubblesCanvasRef} id="bubbles" className="absolute inset-0 w-full h-full -z-10 bg-[var(--color-water-blue)] vertical-linear-mask" width="1000" height="800" style={{ "--fade-height": "200px" }}></canvas>
+                {/* Ingredients Content (UPDATED) */}
+                <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 md:gap-16 items-center relative z-0">
+                  <div
+                    ref={ingredientsContentRef}
+                    className={`max-w-none will-change-transform will-change-opacity text-[var(--color-charcoal)] font-sans`}
+                  >
+                     {/* UPDATED Title */}
+                    <h2
+                      className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-[var(--color-shire-green-dark)] font-serif`}
+                    >
+                      Transparently Sourced, Scientifically Chosen
+                    </h2>
+                     {/* UPDATED Paragraph - Emphasizing USP */}
+                    <p className="mb-6 text-lg leading-relaxed">
+                      We believe in full transparency. Every ingredient in Shire Elixir is selected based on rigorous scientific research for its efficacy and safety. Our formulation process, ingredient rationale, dilution accuracy, and testing data are meticulously logged and openly shared.
+                    </p>
+                     {/* UPDATED GitHub Link/Mention */}
+                     <div className="mb-6 p-4 bg-[var(--color-cream)] rounded-lg border border-[var(--color-shire-green)]/30 inline-block">
+                        <p className="text-base flex items-center">
+                            <GithubIcon className="w-5 h-5 mr-2 flex-shrink-0" colorVar="--color-shire-green-dark" />
+                            <span>
+                                Explore our complete research, formulation logs, and testing data on our public{' '}
+                                <a
+                                  href="YOUR_GITHUB_REPOSITORY_LINK_HERE" // <-- **** REPLACE WITH YOUR ACTUAL GITHUB LINK ****
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="font-semibold text-[var(--color-shire-green-dark)] underline hover:text-[var(--color-shire-green)] transition-colors duration-200"
+                                >
+                                  GitHub repository
+                                </a>.
+                            </span>
+                        </p>
+                     </div>
 
-            <h3 className="text-xl font-semibold mt-8 mb-4 text-[var(--color-shire-green-dark)] font-sans">Key Active Ingredients:</h3>
-            {/* Ingredient List - Wording potentially refined slightly */}
-            <ul
-              ref={ingredientsListRef}
-              className="list-none p-0 mt-2 space-y-4"
-            >
-              <li className="flex items-start text-base">
-                <LeafIcon className="w-5 h-5 mr-3 mt-1 flex-shrink-0" colorVar="--color-shire-green-dark" />
-                <span>
-                  <strong className="font-semibold text-[var(--color-shire-green-dark)]">
-                    Argan Oil:
-                  </strong>{" "}
-                  Chosen for its proven high Vitamin E and fatty acid content, promoting deep hydration and structural repair.
-                </span>
-              </li>
-              <li className="flex items-start text-base">
-                <ShineIcon className="w-5 h-5 mr-3 mt-1 flex-shrink-0" colorVar="--color-shire-green-dark" />
-                <span>
-                  <strong className="font-semibold text-[var(--color-shire-green-dark)]">
-                    Jojoba Oil:
-                  </strong>{" "}
-                  Selected for its molecular similarity to natural sebum, ensuring balanced scalp conditioning and lightweight shine.
-                </span>
-              </li>
-              <li className="flex items-start text-base">
-                 <MoleculeIcon className="w-5 h-5 mr-3 mt-1 flex-shrink-0" colorVar="--color-shire-green-dark"/> {/* Using Molecule for 'alternative' */}
-                <span>
-                  <strong className="font-semibold text-[var(--color-shire-green-dark)]">
-                    Broccoli Seed Oil:
-                  </strong>{" "}
-                  Included as a researched natural alternative to silicones, providing smoothing and gloss effects via fatty acid profile.
-                </span>
-              </li>
-              <li className="flex items-start text-base">
-                 <ScienceIcon className="w-5 h-5 mr-3 mt-1 flex-shrink-0" colorVar="--color-shire-green-dark"/> {/* Using Science for 'extract' */}
-                <span>
-                  <strong className="font-semibold text-[var(--color-shire-green-dark)]">
-                    Rosemary Extract (Standardized):
-                  </strong>{" "}
-                  Utilized for its documented scalp-stimulating properties and antioxidant benefits.
-                </span>
-              </li>
-            </ul>
-            <p className="mt-8 text-base italic text-[var(--color-charcoal)] opacity-80">
-              Precisely formulated. Free from harsh chemicals, parabens, silicones, and sulfates. Vegan & Cruelty-Free. See GitHub for full ingredient list and concentrations.
-            </p>
-          </div>
-          {/* Image remains the same */}
-          <div className="mt-10 md:mt-0">
-            <img ref={ingredientsImageRef} src={ingredientsImageUrl} alt="Natural ingredients like avocados, herbs, and oils spread on a surface" className="rounded-lg shadow-xl object-cover w-full h-auto max-h-[500px] will-change-transform will-change-opacity"/>
-          </div>
-        </div>
-      </section>
+                    <h3 className="text-xl font-semibold mt-8 mb-4 text-[var(--color-shire-green-dark)] font-sans">Key Active Ingredients:</h3>
+                    {/* Ingredient List - Wording potentially refined slightly */}
+                    <ul
+                      ref={ingredientsListRef}
+                      className="list-none p-0 mt-2 space-y-4"
+                    >
+                      <li className="flex items-start text-base">
+                        <LeafIcon className="w-5 h-5 mr-3 mt-1 flex-shrink-0" colorVar="--color-shire-green-dark" />
+                        <span>
+                          <strong className="font-semibold text-[var(--color-shire-green-dark)]">
+                            Argan Oil:
+                          </strong>{" "}
+                          Chosen for its proven high Vitamin E and fatty acid content, promoting deep hydration and structural repair.
+                        </span>
+                      </li>
+                      <li className="flex items-start text-base">
+                        <ShineIcon className="w-5 h-5 mr-3 mt-1 flex-shrink-0" colorVar="--color-shire-green-dark" />
+                        <span>
+                          <strong className="font-semibold text-[var(--color-shire-green-dark)]">
+                            Jojoba Oil:
+                          </strong>{" "}
+                          Selected for its molecular similarity to natural sebum, ensuring balanced scalp conditioning and lightweight shine.
+                        </span>
+                      </li>
+                      <li className="flex items-start text-base">
+                         <MoleculeIcon className="w-5 h-5 mr-3 mt-1 flex-shrink-0" colorVar="--color-shire-green-dark"/> {/* Using Molecule for 'alternative' */}
+                        <span>
+                          <strong className="font-semibold text-[var(--color-shire-green-dark)]">
+                            Broccoli Seed Oil:
+                          </strong>{" "}
+                          Included as a researched natural alternative to silicones, providing smoothing and gloss effects via fatty acid profile.
+                        </span>
+                      </li>
+                      <li className="flex items-start text-base">
+                         <ScienceIcon className="w-5 h-5 mr-3 mt-1 flex-shrink-0" colorVar="--color-shire-green-dark"/> {/* Using Science for 'extract' */}
+                        <span>
+                          <strong className="font-semibold text-[var(--color-shire-green-dark)]">
+                            Rosemary Extract (Standardized):
+                          </strong>{" "}
+                          Utilized for its documented scalp-stimulating properties and antioxidant benefits.
+                        </span>
+                      </li>
+                    </ul>
+                    <p className="mt-8 text-base italic text-[var(--color-charcoal)] opacity-80">
+                      Precisely formulated. Free from harsh chemicals, parabens, silicones, and sulfates. Vegan & Cruelty-Free. See GitHub for full ingredient list and concentrations.
+                    </p>
+                  </div>
+                  {/* Image remains the same */}
+                  <div className="mt-10 md:mt-0">
+                    <img ref={ingredientsImageRef} src={ingredientsImageUrl} alt="Natural ingredients like avocados, herbs, and oils spread on a surface" className="rounded-lg shadow-xl object-cover w-full h-auto max-h-[500px] will-change-transform will-change-opacity"/>
+                  </div>
+                </div>
+              </section>
 
-       {/* Section 4: Benefits (Content largely unchanged, icons updated) */}
-      <section
-        ref={benefitsSectionRef}
-        className={`relative w-full py-24 md:py-36 bg-gradient-to-br from-[var(--color-water-blue-light)] via-[var(--color-water-blue)] to-[var(--color-water-blue-dark)] z-20 text-[var(--color-water-blue-dark)] top-linear-mask`}
-        style={{ "--fade-height": "200px" }}
-      >
-        <div className="container mx-auto px-6 text-center relative">
-          <h2
-            className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-16 font-serif text-[var(--color-shire-green-dark)]`}
-          >
-            Experience the Proven Benefits
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-            {/* Benefit Card 1 */}
-            <div className="bg-white/80 p-8 rounded-xl shadow-lg backdrop-blur-md transition duration-300 ease-in-out hover:bg-white/95 hover:shadow-xl transform hover:-translate-y-2">
-              <LeafIcon // Kept Leaf for Nourishment
-                className="w-10 h-10 inline-block mb-4"
-                colorVar="--color-water-blue-dark"
-              />
-              <h3 className="text-xl font-semibold mt-2 mb-3 text-[var(--color-water-blue-dark)] font-sans">
-                Deep Nourishment
-              </h3>
-              <p className="text-base text-[var(--color-charcoal)] font-sans">
-                Penetrates hair strands to moisturize and strengthen from
-                within, reducing breakage.
-              </p>
-            </div>
-             {/* Benefit Card 2 */}
-            <div className="bg-white/80 p-8 rounded-xl shadow-lg backdrop-blur-md transition duration-300 ease-in-out hover:bg-white/95 hover:shadow-xl transform hover:-translate-y-2">
-              <ShineIcon
-                className="w-10 h-10 inline-block mb-4"
-                colorVar="--color-water-blue-dark"
-              />
-              <h3 className="text-xl font-semibold mt-2 mb-3 text-[var(--color-water-blue-dark)] font-sans">
-                Healthy Radiance
-              </h3>
-              <p className="text-base text-[var(--color-charcoal)] font-sans">
-                Leaves hair looking glossy and vibrant without artificial coatings or greasy residue.
-              </p>
-            </div>
-             {/* Benefit Card 3 */}
-            <div className="bg-white/80 p-8 rounded-xl shadow-lg backdrop-blur-md transition duration-300 ease-in-out hover:bg-white/95 hover:shadow-xl transform hover:-translate-y-2">
-               <MoleculeIcon // Using Molecule for Smoothness/Control
-                className="w-10 h-10 inline-block mb-4"
-                colorVar="--color-water-blue-dark"
-              />
-              <h3 className="text-xl font-semibold mt-2 mb-3 text-[var(--color-water-blue-dark)] font-sans">
-                Manageability & Smoothness
-              </h3>
-              <p className="text-base text-[var(--color-charcoal)] font-sans">
-                Tames flyaways and enhances the natural texture for effortlessly smooth, manageable hair.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+               {/* Section 4: Benefits */}
+              <section
+                ref={benefitsSectionRef}
+                className={`relative w-full py-24 md:py-36 bg-gradient-to-br from-[var(--color-water-blue-light)] via-[var(--color-water-blue)] to-[var(--color-water-blue-dark)] z-20 text-[var(--color-water-blue-dark)] top-linear-mask`}
+                style={{ "--fade-height": "200px" }}
+              >
+                <div className="container mx-auto px-6 text-center relative">
+                  <h2
+                    className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-16 font-serif text-[var(--color-shire-green-dark)]`}
+                  >
+                    Experience the Proven Benefits
+                  </h2>
+                  <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+                    {/* Benefit Card 1 */}
+                    <div className="bg-white/80 p-8 rounded-xl shadow-lg backdrop-blur-md transition duration-300 ease-in-out hover:bg-white/95 hover:shadow-xl transform hover:-translate-y-2">
+                      <LeafIcon // Kept Leaf for Nourishment
+                        className="w-10 h-10 inline-block mb-4"
+                        colorVar="--color-water-blue-dark"
+                      />
+                      <h3 className="text-xl font-semibold mt-2 mb-3 text-[var(--color-water-blue-dark)] font-sans">
+                        Deep Nourishment
+                      </h3>
+                      <p className="text-base text-[var(--color-charcoal)] font-sans">
+                        Penetrates hair strands to moisturize and strengthen from
+                        within, reducing breakage.
+                      </p>
+                    </div>
+                     {/* Benefit Card 2 */}
+                    <div className="bg-white/80 p-8 rounded-xl shadow-lg backdrop-blur-md transition duration-300 ease-in-out hover:bg-white/95 hover:shadow-xl transform hover:-translate-y-2">
+                      <ShineIcon
+                        className="w-10 h-10 inline-block mb-4"
+                        colorVar="--color-water-blue-dark"
+                      />
+                      <h3 className="text-xl font-semibold mt-2 mb-3 text-[var(--color-water-blue-dark)] font-sans">
+                        Healthy Radiance
+                      </h3>
+                      <p className="text-base text-[var(--color-charcoal)] font-sans">
+                        Leaves hair looking glossy and vibrant without artificial coatings or greasy residue.
+                      </p>
+                    </div>
+                     {/* Benefit Card 3 */}
+                    <div className="bg-white/80 p-8 rounded-xl shadow-lg backdrop-blur-md transition duration-300 ease-in-out hover:bg-white/95 hover:shadow-xl transform hover:-translate-y-2">
+                       <MoleculeIcon // Using Molecule for Smoothness/Control
+                        className="w-10 h-10 inline-block mb-4"
+                        colorVar="--color-water-blue-dark"
+                      />
+                      <h3 className="text-xl font-semibold mt-2 mb-3 text-[var(--color-water-blue-dark)] font-sans">
+                        Manageability & Smoothness
+                      </h3>
+                      <p className="text-base text-[var(--color-charcoal)] font-sans">
+                        Tames flyaways and enhances the natural texture for effortlessly smooth, manageable hair.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
 
-      {/* Section 5: How To Use (Unchanged) */}
-      <section
-        ref={howToUseSectionRef}
-        className="relative w-full py-24 md:py-36 bg-[var(--color-cream)] z-20"
-      >
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-16 text-center text-[var(--color-shire-green-dark)] font-serif">
-            Simple Steps to Healthier Hair
-          </h2>
-          <div className="grid md:grid-cols-3 gap-10 md:gap-16 text-center">
-            <div className="flex flex-col items-center">
-              <span className="text-6xl font-bold text-[var(--color-shire-green)] block mb-4 font-serif">1</span>
-              <h3 className="text-2xl font-semibold mb-3 text-[var(--color-shire-green-dark)] font-sans">Dispense</h3>
-              <p className="text-base leading-relaxed text-[var(--color-charcoal)] font-sans">
-                Apply 1-3 drops into palm. Warm elixir between hands. Adjust amount based on hair length/density (refer to usage notes on GitHub for precision).
-              </p>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="text-6xl font-bold text-[var(--color-shire-green)] block mb-4 font-serif">2</span>
-              <h3 className="text-2xl font-semibold mb-3 text-[var(--color-shire-green-dark)] font-sans">Apply</h3>
-              <p className="text-base leading-relaxed text-[var(--color-charcoal)] font-sans">
-                Gently work through damp or dry hair, focusing mid-lengths to ends. Can be used on scalp depending on individual needs (see research notes).
-              </p>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="text-6xl font-bold text-[var(--color-shire-green)] block mb-4 font-serif">3</span>
-              <h3 className="text-2xl font-semibold mb-3 text-[var(--color-shire-green-dark)] font-sans">Style</h3>
-              <p className="text-base leading-relaxed text-[var(--color-charcoal)] font-sans">
-                Style as usual. Effective as a pre-styling treatment, finishing serum, or overnight deep conditioner. Versatility backed by formulation.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+              {/* Section 5: How To Use */}
+              <section
+                ref={howToUseSectionRef}
+                className="relative w-full py-24 md:py-36 bg-[var(--color-cream)] z-20"
+              >
+                <div className="container mx-auto px-6">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-16 text-center text-[var(--color-shire-green-dark)] font-serif">
+                    Simple Steps to Healthier Hair
+                  </h2>
+                  <div className="grid md:grid-cols-3 gap-10 md:gap-16 text-center">
+                    <div className="flex flex-col items-center">
+                      <span className="text-6xl font-bold text-[var(--color-shire-green)] block mb-4 font-serif">1</span>
+                      <h3 className="text-2xl font-semibold mb-3 text-[var(--color-shire-green-dark)] font-sans">Dispense</h3>
+                      <p className="text-base leading-relaxed text-[var(--color-charcoal)] font-sans">
+                        Apply 1-3 drops into palm. Warm elixir between hands. Adjust amount based on hair length/density (refer to usage notes on GitHub for precision).
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <span className="text-6xl font-bold text-[var(--color-shire-green)] block mb-4 font-serif">2</span>
+                      <h3 className="text-2xl font-semibold mb-3 text-[var(--color-shire-green-dark)] font-sans">Apply</h3>
+                      <p className="text-base leading-relaxed text-[var(--color-charcoal)] font-sans">
+                        Gently work through damp or dry hair, focusing mid-lengths to ends. Can be used on scalp depending on individual needs (see research notes).
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <span className="text-6xl font-bold text-[var(--color-shire-green)] block mb-4 font-serif">3</span>
+                      <h3 className="text-2xl font-semibold mb-3 text-[var(--color-shire-green-dark)] font-sans">Style</h3>
+                      <p className="text-base leading-relaxed text-[var(--color-charcoal)] font-sans">
+                        Style as usual. Effective as a pre-styling treatment, finishing serum, or overnight deep conditioner. Versatility backed by formulation.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
 
-      {/* Section 6: CTA (Updated Content) */}
-      <section
-        ref={ctaSectionRef}
-        className="relative w-full py-28 md:py-44 bg-[var(--color-shire-green)] z-20 text-center overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-shire-green)] via-[var(--color-shire-green-dark)] to-[#1a2b1d] opacity-30 z-0"></div>
-        <div className="container mx-auto px-6 relative z-10">
-           {/* UPDATED Title */}
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[var(--color-white)] font-serif">
-            Choose Transparent Hair Wellness
-          </h2>
-           {/* UPDATED Paragraph */}
-          <p className="text-lg md:text-xl text-[var(--color-shire-gold-light)] max-w-xl mx-auto mb-10 leading-relaxed font-sans">
-            Invest in hair care built on science and openness. Experience the Shire Elixir difference – effective, honest, and accessible to all.
-          </p>
-          {/* Button text could be updated slightly if desired, e.g., "Shop Transparently" */}
-          <button className="px-10 py-4 bg-[var(--color-white)] text-[var(--color-shire-green)] rounded-full font-bold text-lg font-sans hover:bg-[var(--color-shire-gold-light)] hover:text-[var(--color-shire-green-dark)] transition duration-300 ease-in-out shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[var(--color-shire-green)] focus:ring-[var(--color-white)]">
-            Shop Shire Elixir
-          </button>
-        </div>
-      </section>
+              {/* Section 6: CTA */}
+              <section
+                ref={ctaSectionRef}
+                className="relative w-full py-28 md:py-44 bg-[var(--color-shire-green)] z-20 text-center overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-shire-green)] via-[var(--color-shire-green-dark)] to-[#1a2b1d] opacity-30 z-0"></div>
+                <div className="container mx-auto px-6 relative z-10">
+                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[var(--color-white)] font-serif">
+                    Choose Transparent Hair Wellness
+                  </h2>
+                  <p className="text-lg md:text-xl text-[var(--color-shire-gold-light)] max-w-xl mx-auto mb-10 leading-relaxed font-sans">
+                    Invest in hair care built on science and openness. Experience the Shire Elixir difference – effective, honest, and accessible to all.
+                  </p>
+                  <button
+                    onClick={() => window.location.href = "/shop"}
+                    className="px-10 py-4 bg-[var(--color-white)] text-[var(--color-shire-green)] rounded-full font-bold text-lg font-sans hover:bg-[var(--color-shire-gold-light)] hover:text-[var(--color-shire-green-dark)] transition duration-300 ease-in-out shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[var(--color-shire-green)] focus:ring-[var(--color-white)]"
+                  >
+                    Shop Shire Elixir
+                  </button>
+                </div>
+              </section>
 
-      {/* Footer (Updated Content - Added GitHub Link) */}
-      <footer
-        ref={footerRef}
-        className="relative w-full py-12 bg-[var(--color-shire-green-dark)] text-[var(--color-shire-gold-light)] text-opacity-80 text-sm z-20 font-sans"
-      >
-        <div className="px-6 text-center">
-          <p className="font-semibold text-base mb-2 text-[var(--color-shire-gold-light)] text-opacity-100">
-            Shire Elixir
-          </p>
-          <p className="mb-2">
-            © {new Date().getFullYear()} Shire Botanicals (or Your Company Name). All rights reserved.
-          </p>
-          <p className="mb-3 italic">
-            Inspired by Nature, Proven by Science, Open by Design.
-          </p>
-           {/* ADDED GitHub Link */}
-           <a
-              href="YOUR_GITHUB_REPOSITORY_LINK_HERE" // <-- **** REPLACE WITH YOUR ACTUAL GITHUB LINK ****
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center text-[var(--color-shire-gold-light)] hover:text-[var(--color-white)] transition-colors duration-200 text-opacity-90 hover:text-opacity-100"
-              title="Explore our research on GitHub"
-            >
-                <GithubIcon className="w-4 h-4 mr-1.5" />
-                <span>View Open Research</span>
-            </a>
-        </div>
-      </footer>
-    </div>
+              {/* Footer */}
+              <footer
+                ref={footerRef}
+                className="relative w-full py-12 bg-[var(--color-shire-green-dark)] text-[var(--color-shire-gold-light)] text-opacity-80 text-sm z-20 font-sans"
+              >
+                <div className="px-6 text-center">
+                  <p className="font-semibold text-base mb-2 text-[var(--color-shire-gold-light)] text-opacity-100">
+                    Shire Elixir
+                  </p>
+                  <p className="mb-2">
+                    © {new Date().getFullYear()} Shire Botanicals (or Your Company Name). All rights reserved.
+                  </p>
+                  <p className="mb-3 italic">
+                    Inspired by Nature, Proven by Science, Open by Design.
+                  </p>
+                   {/* ADDED GitHub Link */}
+                   <a
+                      href="YOUR_GITHUB_REPOSITORY_LINK_HERE" // <-- **** REPLACE WITH YOUR ACTUAL GITHUB LINK ****
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-[var(--color-shire-gold-light)] hover:text-[var(--color-white)] transition-colors duration-200 text-opacity-90 hover:text-opacity-100"
+                      title="Explore our research on GitHub"
+                    >
+                        <GithubIcon className="w-4 h-4 mr-1.5" />
+                        <span>View Open Research</span>
+                    </a>
+                </div>
+              </footer>
+            </>
+          } />
+          <Route path="/shop" element={<ShopPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
